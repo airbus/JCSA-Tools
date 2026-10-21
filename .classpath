@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/stack"/>
+	<classpathentry kind="src" output="output/eclipse/rules" path="src/rules"/>
+	<classpathentry kind="src" output="output/eclipse/test/rules" path="test/rules">
+		<attributes>
+			<attribute name="test" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="output/eclipse/esar" path="src/esar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/esar/apiguardian-api-1.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/esar/error_prone_annotations-2.48.0.jar"/>
+	<classpathentry kind="lib" path="lib/esar/gson-2.14.0.jar"/>
+	<classpathentry kind="lib" path="lib/esar/jspecify-1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/esar/junit-jupiter-api-6.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/esar/junit-jupiter-engine-6.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/esar/junit-platform-commons-6.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/esar/junit-platform-engine-6.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/esar/junit-platform-launcher-6.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/esar/opentest4j-1.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/esar/snakeyaml-2.6.jar"/>
+	<classpathentry kind="lib" path="lib/javacard-host/api_classic-3.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/javacard-host/api_classic_annotations-3.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/shared/asm-9.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/shared/asm-analysis-9.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/shared/asm-commons-9.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/shared/asm-tree-9.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/shared/asm-util-9.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/shared/checker-qual-3.43.0.jar"/>
+	<classpathentry kind="lib" path="lib/shared/com.ibm.wala.cast-1.5.9.jar"/>
+	<classpathentry kind="lib" path="lib/shared/com.ibm.wala.cast.java-1.5.9.jar"/>
+	<classpathentry kind="lib" path="lib/shared/com.ibm.wala.cast.java.ecj-1.5.9.jar"/>
+	<classpathentry kind="lib" path="lib/shared/com.ibm.wala.core-1.5.9.jar"/>
+	<classpathentry kind="lib" path="lib/shared/com.ibm.wala.dalvik-1.5.9.jar"/>
+	<classpathentry kind="lib" path="lib/shared/com.ibm.wala.shrike-1.5.9.jar"/>
+	<classpathentry kind="lib" path="lib/shared/com.ibm.wala.util-1.5.9.jar"/>
+	<classpathentry kind="lib" path="lib/shared/commons-io-2.16.1.jar"/>
+	<classpathentry kind="lib" path="lib/shared/commons-lang3-3.14.0.jar"/>
+	<classpathentry kind="lib" path="lib/shared/dexlib2-2.5.2.jar"/>
+	<classpathentry kind="lib" path="lib/shared/error_prone_annotations-2.28.0.jar"/>
+	<classpathentry kind="lib" path="lib/shared/failureaccess-1.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/shared/functionaljava-4.2.jar"/>
+	<classpathentry kind="lib" path="lib/shared/gson-2.8.9.jar"/>
+	<classpathentry kind="lib" path="lib/shared/guava-33.3.0-jre.jar"/>
+	<classpathentry kind="lib" path="lib/shared/heros-1.2.3.jar"/>
+	<classpathentry kind="lib" path="lib/shared/j2objc-annotations-3.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/shared/jgrapht-core-1.3.1.jar"/>
+	<classpathentry kind="lib" path="lib/shared/jheaps-0.10.jar"/>
+	<classpathentry kind="lib" path="lib/shared/jsr305-3.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/shared/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar"/>
+	<classpathentry kind="lib" path="lib/shared/org.eclipse.core.commands-3.9.700.jar"/>
+	<classpathentry kind="lib" path="lib/shared/org.eclipse.core.contenttype-3.7.1000.jar"/>
+	<classpathentry kind="lib" path="lib/shared/org.eclipse.core.expressions-3.8.200.jar"/>
+	<classpathentry kind="lib" path="lib/shared/org.eclipse.core.filesystem-1.9.500.jar"/>
+	<classpathentry kind="lib" path="lib/shared/org.eclipse.core.jobs-3.9.3.jar"/>
+	<classpathentry kind="lib" path="lib/shared/org.eclipse.core.resources-3.14.0.jar"/>
+	<classpathentry kind="lib" path="lib/shared/org.eclipse.core.runtime-3.17.100.jar"/>
+	<classpathentry kind="lib" path="lib/shared/org.eclipse.equinox.app-1.6.200.jar"/>
+	<classpathentry kind="lib" path="lib/shared/org.eclipse.equinox.common-3.14.100.jar"/>
+	<classpathentry kind="lib" path="lib/shared/org.eclipse.equinox.preferences-3.9.100.jar"/>
+	<classpathentry kind="lib" path="lib/shared/org.eclipse.equinox.registry-3.11.200.jar"/>
+	<classpathentry kind="lib" path="lib/shared/org.eclipse.jdt.core-3.14.0.jar"/>
+	<classpathentry kind="lib" path="lib/shared/org.eclipse.osgi-3.14.0.jar"/>
+	<classpathentry kind="lib" path="lib/shared/org.eclipse.text-3.12.300.jar"/>
+	<classpathentry kind="lib" path="lib/shared/org.osgi.service.prefs-1.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/shared/osgi.annotation-8.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/shared/picocli-4.7.7.jar"/>
+	<classpathentry kind="lib" path="lib/shared/slf4j-api-2.0.13.jar"/>
+	<classpathentry kind="lib" path="lib/shared/slf4j-simple-2.0.13.jar"/>
+	<classpathentry kind="lib" path="lib/shared/sootup.analysis.interprocedural-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/shared/sootup.analysis.intraprocedural-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/shared/sootup.callgraph-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/shared/sootup.core-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/shared/sootup.interceptors-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/shared/sootup.java.bytecode.frontend-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/shared/sootup.java.core-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/shared/sootup.java.sourcecode.frontend-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/stack/asm-9.9.1.jar"/>
+	<classpathentry kind="output" path="output/eclipse/stack"/>
+</classpath>

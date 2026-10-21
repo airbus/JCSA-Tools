@@ -1,0 +1,19 @@
+classPath:
+  - test1
+  - test2
+sourcePath:
+  - src
+entryMethods:
+  - "com.airbus.Test1.process(javacard.framework.APDU)"
+  - "com.airbus.Test1.install(byte[],short,byte)"
+  - "com.airbus.Test1.uninstall()"
+entryClasses:
+  - "com.airbus.Test2"
+plugins:
+  - javacard.jar
+traversalPackageBlacklist:
+  - com.example.vendor.
+ignoreDefaultTraversalPackageBlacklist: false
+ruleConfiguration: examples/jc-detectors.yaml
+sarifOutput: findings.sarif
+failOnFinding: true

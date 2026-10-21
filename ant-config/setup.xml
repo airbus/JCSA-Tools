@@ -1,0 +1,125 @@
+<project name="setup">
+    <property name="javacard.api.version" value="3.1.0"/>
+    <property name="javacard.api.classic.jar"
+              value="${javacard.lib.dir}/api_classic-${javacard.api.version}.jar"/>
+    <property name="javacard.api.annotations.jar"
+              value="${javacard.lib.dir}/api_classic_annotations-${javacard.api.version}.jar"/>
+
+    <target name="-detect_java_home">
+        <property environment="env"/>
+        <condition property="java.home.env.set">
+            <and>
+                <isset property="env.JAVA_HOME"/>
+                <not>
+                    <equals arg1="${env.JAVA_HOME}" arg2=""/>
+                </not>
+            </and>
+        </condition>
+    </target>
+
+    <target name="-check_java_from_home" depends="-detect_java_home" if="java.home.env.set">
+        <available file="${env.JAVA_HOME}/release" property="jdk.release.present"/>
+        <fail unless="jdk.release.present"
+              message="JAVA_HOME=${env.JAVA_HOME} is not a JDK (missing release file). Set JAVA_HOME to a JDK 21 install."/>
+        <loadfile property="jdk.release.contents" srcFile="${env.JAVA_HOME}/release"/>
+        <condition property="jdk.is.21">
+            <matches string="${jdk.release.contents}" pattern='JAVA_VERSION="21'/>
+        </condition>
+        <fail unless="jdk.is.21"
+              message="JAVA_HOME=${env.JAVA_HOME} is not JDK 21. This project requires Java 21. Set JAVA_HOME to a JDK 21 install."/>
+    </target>
+
+    <target name="-check_java_from_path" depends="-detect_java_home" unless="java.home.env.set">
+        <fail message="JAVA_HOME is not set and java on PATH is not JDK 21 (got ${ant.java.version}). Point JAVA_HOME at JDK 21, for example: export JAVA_HOME=/usr/lib/jvm/java-21-openjdk">
+            <condition>
+                <not>
+                    <equals arg1="${ant.java.version}" arg2="21"/>
+                </not>
+            </condition>
+        </fail>
+    </target>
+
+    <target name="check_java" depends="-check_java_from_home,-check_java_from_path"
+            description="Require JDK 21 from JAVA_HOME, else java on PATH"/>
+
+    <target name="check_bootstrap" description="Require Java Card API jars from ant bootstrap">
+        <available file="${javacard.api.classic.jar}" property="bootstrap.classic.present"/>
+        <available file="${javacard.api.annotations.jar}" property="bootstrap.annotations.present"/>
+        <available file="${javacard.host.lib.dir}/api_classic-${javacard.api.version}.jar"
+                   property="bootstrap.host.classic.present"/>
+        <available file="${javacard.host.lib.dir}/api_classic_annotations-${javacard.api.version}.jar"
+                   property="bootstrap.host.annotations.present"/>
+        <fail unless="bootstrap.classic.present"
+              message="Missing ${javacard.api.classic.jar}. Run: ant bootstrap"/>
+        <fail unless="bootstrap.annotations.present"
+              message="Missing ${javacard.api.annotations.jar}. Run: ant bootstrap"/>
+        <fail unless="bootstrap.host.classic.present"
+              message="Missing host API jar in ${javacard.host.lib.dir}. Run: ant bootstrap"/>
+        <fail unless="bootstrap.host.annotations.present"
+              message="Missing host annotations jar in ${javacard.host.lib.dir}. Run: ant bootstrap"/>
+    </target>
+
+    <target name="check_env" depends="check_java,check_bootstrap"
+            description="Verify JDK 21 (JAVA_HOME or PATH) and that ant bootstrap has been run"/>
+
+    <target name="bootstrap" depends="check_java"
+            description="Copy JCDK API jars from tools and build host jars">
+        <property environment="env"/>
+        <condition property="jc.home.tools" value="${JC_HOME_TOOLS}">
+            <isset property="JC_HOME_TOOLS"/>
+        </condition>
+        <condition property="jc.home.tools" value="${env.JC_HOME_TOOLS}">
+            <and>
+                <isset property="env.JC_HOME_TOOLS"/>
+                <not>
+                    <equals arg1="${env.JC_HOME_TOOLS}" arg2=""/>
+                </not>
+            </and>
+        </condition>
+        <fail unless="jc.home.tools"
+              message="Set JC_HOME_TOOLS or pass -Djc.home.tools=/path/to/jcdk/tools"/>
+        <property name="jc.tools.classic.jar"
+                  value="${jc.home.tools}/lib/api_classic-${javacard.api.version}.jar"/>
+        <property name="jc.tools.annotations.jar"
+                  value="${jc.home.tools}/lib/api_classic_annotations-${javacard.api.version}.jar"/>
+        <available file="${jc.tools.classic.jar}" property="jc.tools.classic.present"/>
+        <available file="${jc.tools.annotations.jar}" property="jc.tools.annotations.present"/>
+        <fail unless="jc.tools.classic.present"
+              message="Missing ${jc.tools.classic.jar}"/>
+        <fail unless="jc.tools.annotations.present"
+              message="Missing ${jc.tools.annotations.jar}"/>
+        <mkdir dir="${javacard.lib.dir}"/>
+        <copy file="${jc.tools.classic.jar}" tofile="${javacard.api.classic.jar}" overwrite="true"/>
+        <copy file="${jc.tools.annotations.jar}" tofile="${javacard.api.annotations.jar}" overwrite="true"/>
+        <antcall target="host_javacard_api"/>
+    </target>
+
+    <target name="host_javacard_api" description="Build host-JVM-safe copies of JCDK API JARs (no java.* stubs)">
+        <available file="${javacard.api.classic.jar}" property="javacard.api.classic.present"/>
+        <available file="${javacard.api.annotations.jar}" property="javacard.api.annotations.present"/>
+        <fail unless="javacard.api.classic.present"
+                message="Missing ${javacard.api.classic.jar} — add JCDK Classic API under ${javacard.lib.dir}"/>
+        <fail unless="javacard.api.annotations.present"
+                message="Missing ${javacard.api.annotations.jar} — add JCDK annotations API under ${javacard.lib.dir}"/>
+        <delete dir="${javacard.host.strip.tmp}"/>
+        <mkdir dir="${javacard.host.lib.dir}"/>
+        <mkdir dir="${javacard.host.strip.tmp}/api_classic"/>
+        <unzip src="${javacard.api.classic.jar}" dest="${javacard.host.strip.tmp}/api_classic">
+            <patternset>
+                <exclude name="java/**"/>
+            </patternset>
+        </unzip>
+        <jar destfile="${javacard.host.lib.dir}/api_classic-${javacard.api.version}.jar"
+             basedir="${javacard.host.strip.tmp}/api_classic"/>
+        <delete dir="${javacard.host.strip.tmp}/api_classic"/>
+        <mkdir dir="${javacard.host.strip.tmp}/api_ann"/>
+        <unzip src="${javacard.api.annotations.jar}" dest="${javacard.host.strip.tmp}/api_ann">
+            <patternset>
+                <exclude name="java/**"/>
+            </patternset>
+        </unzip>
+        <jar destfile="${javacard.host.lib.dir}/api_classic_annotations-${javacard.api.version}.jar"
+             basedir="${javacard.host.strip.tmp}/api_ann"/>
+        <delete dir="${javacard.host.strip.tmp}/api_ann"/>
+    </target>
+</project>

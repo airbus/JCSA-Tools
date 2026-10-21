@@ -1,0 +1,291 @@
+Third-party components distributed with JCSA
+
+This list is generated from the jars copied by jcsa_dist
+(lib/shared, lib/stack, lib/esar).
+License texts are stored once under licenses/.
+
+com.google.code.findbugs:jsr305:3.0.2
+  Jar: jsr305-3.0.2.jar
+  Download: https://repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar
+  License: Apache-2.0 (licenses/Apache-2.0.txt)
+
+com.google.code.gson:gson:2.14.0
+  Jar: gson-2.14.0.jar
+  Download: https://repo1.maven.org/maven2/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar
+  License: Apache-2.0 (licenses/Apache-2.0.txt)
+
+com.google.errorprone:error_prone_annotations:2.48.0
+  Jar: error_prone_annotations-2.48.0.jar
+  Download: https://repo1.maven.org/maven2/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar
+  License: Apache-2.0 (licenses/Apache-2.0.txt)
+
+com.google.guava:failureaccess:1.0.2
+  Jar: failureaccess-1.0.2.jar
+  Download: https://repo1.maven.org/maven2/com/google/guava/failureaccess/1.0.2/failureaccess-1.0.2.jar
+  License: Apache-2.0 (licenses/Apache-2.0.txt)
+
+com.google.guava:guava:33.3.0-jre
+  Jar: guava-33.3.0-jre.jar
+  Download: https://repo1.maven.org/maven2/com/google/guava/guava/33.3.0-jre/guava-33.3.0-jre.jar
+  License: Apache-2.0 (licenses/Apache-2.0.txt)
+
+com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
+  Jar: listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar
+  Download: https://repo1.maven.org/maven2/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar
+  License: Apache-2.0 (licenses/Apache-2.0.txt)
+
+com.google.j2objc:j2objc-annotations:3.0.0
+  Jar: j2objc-annotations-3.0.0.jar
+  Download: https://repo1.maven.org/maven2/com/google/j2objc/j2objc-annotations/3.0.0/j2objc-annotations-3.0.0.jar
+  License: Apache-2.0 (licenses/Apache-2.0.txt)
+
+com.ibm.wala:com.ibm.wala.cast.java.ecj:1.5.9
+  Jar: com.ibm.wala.cast.java.ecj-1.5.9.jar
+  Download: https://repo1.maven.org/maven2/com/ibm/wala/com.ibm.wala.cast.java.ecj/1.5.9/com.ibm.wala.cast.java.ecj-1.5.9.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+com.ibm.wala:com.ibm.wala.cast.java:1.5.9
+  Jar: com.ibm.wala.cast.java-1.5.9.jar
+  Download: https://repo1.maven.org/maven2/com/ibm/wala/com.ibm.wala.cast.java/1.5.9/com.ibm.wala.cast.java-1.5.9.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+com.ibm.wala:com.ibm.wala.cast:1.5.9
+  Jar: com.ibm.wala.cast-1.5.9.jar
+  Download: https://repo1.maven.org/maven2/com/ibm/wala/com.ibm.wala.cast/1.5.9/com.ibm.wala.cast-1.5.9.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+com.ibm.wala:com.ibm.wala.core:1.5.9
+  Jar: com.ibm.wala.core-1.5.9.jar
+  Download: https://repo1.maven.org/maven2/com/ibm/wala/com.ibm.wala.core/1.5.9/com.ibm.wala.core-1.5.9.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+com.ibm.wala:com.ibm.wala.dalvik:1.5.9
+  Jar: com.ibm.wala.dalvik-1.5.9.jar
+  Download: https://repo1.maven.org/maven2/com/ibm/wala/com.ibm.wala.dalvik/1.5.9/com.ibm.wala.dalvik-1.5.9.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+com.ibm.wala:com.ibm.wala.shrike:1.5.9
+  Jar: com.ibm.wala.shrike-1.5.9.jar
+  Download: https://repo1.maven.org/maven2/com/ibm/wala/com.ibm.wala.shrike/1.5.9/com.ibm.wala.shrike-1.5.9.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+com.ibm.wala:com.ibm.wala.util:1.5.9
+  Jar: com.ibm.wala.util-1.5.9.jar
+  Download: https://repo1.maven.org/maven2/com/ibm/wala/com.ibm.wala.util/1.5.9/com.ibm.wala.util-1.5.9.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+commons-io:commons-io:2.16.1
+  Jar: commons-io-2.16.1.jar
+  Download: https://repo1.maven.org/maven2/commons-io/commons-io/2.16.1/commons-io-2.16.1.jar
+  License: Apache-2.0 (licenses/Apache-2.0.txt)
+
+de.upb.cs.swt:heros:1.2.3
+  Jar: heros-1.2.3.jar
+  Download: https://repo1.maven.org/maven2/de/upb/cs/swt/heros/1.2.3/heros-1.2.3.jar
+  License: LGPL-2.1 (licenses/LGPL-2.1.txt)
+
+info.picocli:picocli:4.7.7
+  Jar: picocli-4.7.7.jar
+  Download: https://repo1.maven.org/maven2/info/picocli/picocli/4.7.7/picocli-4.7.7.jar
+  License: Apache-2.0 (licenses/Apache-2.0.txt)
+
+org.apache.commons:commons-lang3:3.14.0
+  Jar: commons-lang3-3.14.0.jar
+  Download: https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar
+  License: Apache-2.0 (licenses/Apache-2.0.txt)
+
+org.checkerframework:checker-qual:3.43.0
+  Jar: checker-qual-3.43.0.jar
+  Download: https://repo1.maven.org/maven2/org/checkerframework/checker-qual/3.43.0/checker-qual-3.43.0.jar
+  License: MIT (licenses/MIT.txt)
+
+org.eclipse.jdt:org.eclipse.jdt.core:3.14.0
+  Jar: org.eclipse.jdt.core-3.14.0.jar
+  Download: https://repo1.maven.org/maven2/org/eclipse/jdt/org.eclipse.jdt.core/3.14.0/org.eclipse.jdt.core-3.14.0.jar
+  License: EPL-1.0 (licenses/EPL-1.0.txt)
+
+org.eclipse.platform:org.eclipse.core.commands:3.9.700
+  Jar: org.eclipse.core.commands-3.9.700.jar
+  Download: https://repo1.maven.org/maven2/org/eclipse/platform/org.eclipse.core.commands/3.9.700/org.eclipse.core.commands-3.9.700.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+org.eclipse.platform:org.eclipse.core.contenttype:3.7.1000
+  Jar: org.eclipse.core.contenttype-3.7.1000.jar
+  Download: https://repo1.maven.org/maven2/org/eclipse/platform/org.eclipse.core.contenttype/3.7.1000/org.eclipse.core.contenttype-3.7.1000.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+org.eclipse.platform:org.eclipse.core.expressions:3.8.200
+  Jar: org.eclipse.core.expressions-3.8.200.jar
+  Download: https://repo1.maven.org/maven2/org/eclipse/platform/org.eclipse.core.expressions/3.8.200/org.eclipse.core.expressions-3.8.200.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+org.eclipse.platform:org.eclipse.core.filesystem:1.9.500
+  Jar: org.eclipse.core.filesystem-1.9.500.jar
+  Download: https://repo1.maven.org/maven2/org/eclipse/platform/org.eclipse.core.filesystem/1.9.500/org.eclipse.core.filesystem-1.9.500.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+org.eclipse.platform:org.eclipse.core.jobs:3.9.3
+  Jar: org.eclipse.core.jobs-3.9.3.jar
+  Download: https://repo1.maven.org/maven2/org/eclipse/platform/org.eclipse.core.jobs/3.9.3/org.eclipse.core.jobs-3.9.3.jar
+  License: EPL-1.0 (licenses/EPL-1.0.txt)
+
+org.eclipse.platform:org.eclipse.core.resources:3.14.0
+  Jar: org.eclipse.core.resources-3.14.0.jar
+  Download: https://repo1.maven.org/maven2/org/eclipse/platform/org.eclipse.core.resources/3.14.0/org.eclipse.core.resources-3.14.0.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+org.eclipse.platform:org.eclipse.core.runtime:3.17.100
+  Jar: org.eclipse.core.runtime-3.17.100.jar
+  Download: https://repo1.maven.org/maven2/org/eclipse/platform/org.eclipse.core.runtime/3.17.100/org.eclipse.core.runtime-3.17.100.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+org.eclipse.platform:org.eclipse.equinox.app:1.6.200
+  Jar: org.eclipse.equinox.app-1.6.200.jar
+  Download: https://repo1.maven.org/maven2/org/eclipse/platform/org.eclipse.equinox.app/1.6.200/org.eclipse.equinox.app-1.6.200.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+org.eclipse.platform:org.eclipse.equinox.common:3.14.100
+  Jar: org.eclipse.equinox.common-3.14.100.jar
+  Download: https://repo1.maven.org/maven2/org/eclipse/platform/org.eclipse.equinox.common/3.14.100/org.eclipse.equinox.common-3.14.100.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+org.eclipse.platform:org.eclipse.equinox.preferences:3.9.100
+  Jar: org.eclipse.equinox.preferences-3.9.100.jar
+  Download: https://repo1.maven.org/maven2/org/eclipse/platform/org.eclipse.equinox.preferences/3.9.100/org.eclipse.equinox.preferences-3.9.100.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+org.eclipse.platform:org.eclipse.equinox.registry:3.11.200
+  Jar: org.eclipse.equinox.registry-3.11.200.jar
+  Download: https://repo1.maven.org/maven2/org/eclipse/platform/org.eclipse.equinox.registry/3.11.200/org.eclipse.equinox.registry-3.11.200.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+org.eclipse.platform:org.eclipse.osgi:3.14.0
+  Jar: org.eclipse.osgi-3.14.0.jar
+  Download: https://repo1.maven.org/maven2/org/eclipse/platform/org.eclipse.osgi/3.14.0/org.eclipse.osgi-3.14.0.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+org.eclipse.platform:org.eclipse.text:3.12.300
+  Jar: org.eclipse.text-3.12.300.jar
+  Download: https://repo1.maven.org/maven2/org/eclipse/platform/org.eclipse.text/3.12.300/org.eclipse.text-3.12.300.jar
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+org.functionaljava:functionaljava:4.2
+  Jar: functionaljava-4.2.jar
+  Download: https://repo1.maven.org/maven2/org/functionaljava/functionaljava/4.2/functionaljava-4.2.jar
+  License: BSD-3-Clause (licenses/BSD-3-Clause.txt)
+
+org.jgrapht:jgrapht-core:1.3.1
+  Jar: jgrapht-core-1.3.1.jar
+  Download: https://repo1.maven.org/maven2/org/jgrapht/jgrapht-core/1.3.1/jgrapht-core-1.3.1.jar
+  License: LGPL-2.1 (licenses/LGPL-2.1.txt)
+  License: EPL-2.0 (licenses/EPL-2.0.txt)
+
+org.jheaps:jheaps:0.10
+  Jar: jheaps-0.10.jar
+  Download: https://repo1.maven.org/maven2/org/jheaps/jheaps/0.10/jheaps-0.10.jar
+  License: Apache-2.0 (licenses/Apache-2.0.txt)
+
+org.jspecify:jspecify:1.0.0
+  Jar: jspecify-1.0.0.jar
+  Download: https://repo1.maven.org/maven2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar
+  License: Apache-2.0 (licenses/Apache-2.0.txt)
+
+org.osgi:org.osgi.service.prefs:1.1.2
+  Jar: org.osgi.service.prefs-1.1.2.jar
+  Download: https://repo1.maven.org/maven2/org/osgi/org.osgi.service.prefs/1.1.2/org.osgi.service.prefs-1.1.2.jar
+  License: Apache-2.0 (licenses/Apache-2.0.txt)
+
+org.osgi:osgi.annotation:8.0.1
+  Jar: osgi.annotation-8.0.1.jar
+  Download: https://repo1.maven.org/maven2/org/osgi/osgi.annotation/8.0.1/osgi.annotation-8.0.1.jar
+  License: Apache-2.0 (licenses/Apache-2.0.txt)
+
+org.ow2.asm:asm-analysis:9.7.1
+  Jar: asm-analysis-9.7.1.jar
+  Download: https://repo1.maven.org/maven2/org/ow2/asm/asm-analysis/9.7.1/asm-analysis-9.7.1.jar
+  License: BSD-3-Clause (licenses/BSD-3-Clause.txt)
+
+org.ow2.asm:asm-commons:9.7.1
+  Jar: asm-commons-9.7.1.jar
+  Download: https://repo1.maven.org/maven2/org/ow2/asm/asm-commons/9.7.1/asm-commons-9.7.1.jar
+  License: BSD-3-Clause (licenses/BSD-3-Clause.txt)
+
+org.ow2.asm:asm-tree:9.7.1
+  Jar: asm-tree-9.7.1.jar
+  Download: https://repo1.maven.org/maven2/org/ow2/asm/asm-tree/9.7.1/asm-tree-9.7.1.jar
+  License: BSD-3-Clause (licenses/BSD-3-Clause.txt)
+
+org.ow2.asm:asm-util:9.7.1
+  Jar: asm-util-9.7.1.jar
+  Download: https://repo1.maven.org/maven2/org/ow2/asm/asm-util/9.7.1/asm-util-9.7.1.jar
+  License: BSD-3-Clause (licenses/BSD-3-Clause.txt)
+
+org.ow2.asm:asm:9.7.1
+  Jar: asm-9.7.1.jar
+  Download: https://repo1.maven.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar
+  License: BSD-3-Clause (licenses/BSD-3-Clause.txt)
+
+org.ow2.asm:asm:9.9.1
+  Jar: asm-9.9.1.jar
+  Download: https://repo1.maven.org/maven2/org/ow2/asm/asm/9.9.1/asm-9.9.1.jar
+  License: BSD-3-Clause (licenses/BSD-3-Clause.txt)
+
+org.slf4j:slf4j-api:2.0.13
+  Jar: slf4j-api-2.0.13.jar
+  Download: https://repo1.maven.org/maven2/org/slf4j/slf4j-api/2.0.13/slf4j-api-2.0.13.jar
+  License: MIT (licenses/MIT.txt)
+
+org.slf4j:slf4j-simple:2.0.13
+  Jar: slf4j-simple-2.0.13.jar
+  Download: https://repo1.maven.org/maven2/org/slf4j/slf4j-simple/2.0.13/slf4j-simple-2.0.13.jar
+  License: MIT (licenses/MIT.txt)
+
+org.smali:dexlib2:2.5.2
+  Jar: dexlib2-2.5.2.jar
+  Download: https://repo1.maven.org/maven2/org/smali/dexlib2/2.5.2/dexlib2-2.5.2.jar
+  License: BSD-3-Clause (licenses/BSD-3-Clause.txt)
+
+org.soot-oss:sootup.analysis.interprocedural:2.0.0
+  Jar: sootup.analysis.interprocedural-2.0.0.jar
+  Download: https://repo1.maven.org/maven2/org/soot-oss/sootup.analysis.interprocedural/2.0.0/sootup.analysis.interprocedural-2.0.0.jar
+  License: LGPL-2.1 (licenses/LGPL-2.1.txt)
+
+org.soot-oss:sootup.analysis.intraprocedural:2.0.0
+  Jar: sootup.analysis.intraprocedural-2.0.0.jar
+  Download: https://repo1.maven.org/maven2/org/soot-oss/sootup.analysis.intraprocedural/2.0.0/sootup.analysis.intraprocedural-2.0.0.jar
+  License: LGPL-2.1 (licenses/LGPL-2.1.txt)
+
+org.soot-oss:sootup.callgraph:2.0.0
+  Jar: sootup.callgraph-2.0.0.jar
+  Download: https://repo1.maven.org/maven2/org/soot-oss/sootup.callgraph/2.0.0/sootup.callgraph-2.0.0.jar
+  License: LGPL-2.1 (licenses/LGPL-2.1.txt)
+
+org.soot-oss:sootup.core:2.0.0
+  Jar: sootup.core-2.0.0.jar
+  Download: https://repo1.maven.org/maven2/org/soot-oss/sootup.core/2.0.0/sootup.core-2.0.0.jar
+  License: LGPL-2.1 (licenses/LGPL-2.1.txt)
+
+org.soot-oss:sootup.interceptors:2.0.0
+  Jar: sootup.interceptors-2.0.0.jar
+  Download: https://repo1.maven.org/maven2/org/soot-oss/sootup.interceptors/2.0.0/sootup.interceptors-2.0.0.jar
+  License: LGPL-2.1 (licenses/LGPL-2.1.txt)
+
+org.soot-oss:sootup.java.bytecode.frontend:2.0.0
+  Jar: sootup.java.bytecode.frontend-2.0.0.jar
+  Download: https://repo1.maven.org/maven2/org/soot-oss/sootup.java.bytecode.frontend/2.0.0/sootup.java.bytecode.frontend-2.0.0.jar
+  License: LGPL-2.1 (licenses/LGPL-2.1.txt)
+
+org.soot-oss:sootup.java.core:2.0.0
+  Jar: sootup.java.core-2.0.0.jar
+  Download: https://repo1.maven.org/maven2/org/soot-oss/sootup.java.core/2.0.0/sootup.java.core-2.0.0.jar
+  License: LGPL-2.1 (licenses/LGPL-2.1.txt)
+
+org.soot-oss:sootup.java.sourcecode.frontend:2.0.0
+  Jar: sootup.java.sourcecode.frontend-2.0.0.jar
+  Download: https://repo1.maven.org/maven2/org/soot-oss/sootup.java.sourcecode.frontend/2.0.0/sootup.java.sourcecode.frontend-2.0.0.jar
+  License: LGPL-2.1 (licenses/LGPL-2.1.txt)
+
+org.yaml:snakeyaml:2.6
+  Jar: snakeyaml-2.6.jar
+  Download: https://repo1.maven.org/maven2/org/yaml/snakeyaml/2.6/snakeyaml-2.6.jar
+  License: Apache-2.0 (licenses/Apache-2.0.txt)

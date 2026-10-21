@@ -1,0 +1,71 @@
+rules:
+- JcApduBufferState:
+    enabled: true
+    severity: error
+- JcAtomicTransactionBalance:
+    enabled: true
+    severity: error
+- JcCallGraphCycle:
+    enabled: true
+    severity: warning
+- JcCatchException:
+    enabled: true
+    severity: error
+- JcCompileTimeUncertainty:
+    enabled: true
+    severity: warning
+- JcOneShotUsage:
+    enabled: true
+    severity: error
+- JcCustomException:
+    enabled: true
+    severity: error
+- JcDeprecatedCipherAlg:
+    enabled: true
+    severity: error
+- JcDeprecatedRandomDataAlg:
+    enabled: true
+    severity: error
+- JcDirectRecursion:
+    enabled: true
+    severity: error
+- JcHotField:
+    enabled: true
+    severity: warning
+- JcImplicitByteWidening:
+    enabled: true
+    severity: warning
+- JcUnknownArraySize:
+    enabled: true
+    severity: warning
+- JcIsoExceptionInvalidSw:
+    enabled: true
+    severity: error
+    allowedCustomSws: []
+- JcMissingUninstall:
+    enabled: true
+    severity: error
+- JcOwnerPinCheck:
+    enabled: true
+    severity: warning
+- JcPackageBlackList:
+    enabled: true
+    severity: error
+- JcProcessAllocation:
+    enabled: true
+    severity: warning
+- JcRecordLikeClass:
+    enabled: true
+    severity: warning
+- JcRegisterMissingLifeCycle:
+    enabled: true
+    severity: error
+- JcRuntimeExceptionsNotAllowed:
+    enabled: true
+    severity: warning
+- JcShareableMultiSelectable:
+    enabled: true
+    severity: error
+- JcSignedRightShift:
+    enabled: true
+    severity: error

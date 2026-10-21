@@ -1,0 +1,8 @@
+Bootstrap dependencies
+======================
+
+maven-resolver-ant-tasks
+------------------------
+
+- License: Apache-2.0 license
+- Source: https://github.com/apache/maven-resolver-ant-tasks

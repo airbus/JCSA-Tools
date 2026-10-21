@@ -1,0 +1,260 @@
+<project name="jcsa" default="all" xmlns:resolver="antlib:org.apache.maven.resolver.ant">
+    <property name="jcsa.version" value="1.2.1"/>
+
+    <!-- Project properties -->
+    <property name="build.dir" value="output"/>
+    <property name="test.dir" value="${build.dir}/test"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="build.lib.dir" value="${lib.dir}/build-deps"/>
+    <property name="tmp.dir" value="${build.dir}/tmp"/>
+    <property name="report.dir" value="${build.dir}/reports"/>
+    <property name="shared.lib.dir" value="${lib.dir}/shared"/>
+
+    <!-- Stack analyser properties -->
+    <property name="stack.src.dir" value="src/stack"/>
+    <property name="stack.build.dir" value="${build.dir}/stack"/>
+    <property name="stack.classes.dir" value="${stack.build.dir}/classes"/>
+    <property name="stack.lib.dir" value="${lib.dir}/stack"/>
+    <property name="stack.jar" value="jcsa.jar"/>
+    <property name="stack.jar.output" value="${build.dir}/${stack.jar}"/>
+    <property name="stack.main.class" value="com.airbus.Main"/>
+
+    <!-- esar properties -->
+    <property name="esar.src.dir" value="src/esar"/>
+    <property name="esar.build.dir" value="${build.dir}/esar"/>
+    <property name="esar.classes.dir" value="${esar.build.dir}/classes"/>
+    <property name="esar.lib.dir" value="${lib.dir}/esar"/>
+    <property name="test.lib.dir" value="${lib.dir}/test"/>
+    <property name="esar.jar" value="esar.jar"/>
+    <property name="esar.jar.output" value="${build.dir}/${esar.jar}"/>
+    <property name="esar.main.class" value="com.airbus.esar.Main"/>
+
+    <!-- Java Card rule properties -->
+    <property name="javacard.rule.src.dir" value="src/rules"/>
+    <property name="javacard.rule.build.dir" value="${build.dir}/rules"/>
+    <property name="javacard.rule.classes.dir" value="${javacard.rule.build.dir}/classes"/>
+    <property name="javacard.rule.lib.dir" value="${lib.dir}/rules"/>
+    <property name="javacard.rule.jar" value="javacard.jar"/>
+    <property name="javacard.rule.jar.output" value="${build.dir}/${javacard.rule.jar}"/>
+    <property name="jcsa.dist.root" value="jcsa-${jcsa.version}"/>
+    <property name="jcsa.dist.staging.dir" value="${tmp.dir}/${jcsa.dist.root}"/>
+    <property name="jcsa.dist.zip" value="${build.dir}/${jcsa.dist.root}.zip"/>
+    <property name="foss.list.dir" value="${basedir}/third-party"/>
+
+    <!-- Java Card rule testing properties -->
+    <property name="javacard.rule.test.src.dir" value="test/rules"/>
+    <property name="javacard.rule.test.build.dir" value="${build.dir}/test/rules"/>
+    <property name="javacard.rule.test.classes.dir" value="${javacard.rule.test.build.dir}/classes"/>
+
+    <!-- ESAR core testing properties -->
+    <property name="esar.test.src.dir" value="test/esar"/>
+    <property name="esar.test.build.dir" value="${build.dir}/test/esar"/>
+    <property name="esar.test.classes.dir" value="${esar.test.build.dir}/classes"/>
+
+    <!-- Java Card API -->
+    <property name="javacard.lib.dir" value="${lib.dir}/javacard"/>
+    <!-- For eclipse -->
+    <property name="javacard.host.lib.dir" value="${lib.dir}/javacard-host"/>
+    <property name="javacard.host.strip.tmp" value="${tmp.dir}/javacard-host-strip"/>
+    <import file="ant-config/setup.xml"/>
+
+    <!-- Import other ant files -->
+    <import file="ant-config/ant-maven.xml"/>
+    <import file="ant-config/testing.xml"/>
+
+    <target name="clean_lib" description="Clean up libs">
+        <delete dir="${lib.dir}"/>
+    </target>
+
+    <target name="clear_tmp">
+    </target>
+
+    <target name="clean_rules" depends="clear_tmp">
+        <delete dir="${javacard.rule.build.dir}"/>
+        <delete dir="${javacard.rule.test.build.dir}"/>
+    </target>
+
+    <target name="clean" depends="clear_tmp">
+        <delete dir="${stack.build.dir}"/>
+        <delete dir="${esar.build.dir}"/>
+        <delete dir="${tmp.dir}"/>
+        <delete dir="${test.dir}"/>
+        <delete file="${build.dir}/${stack.jar}"/>
+        <delete file="${esar.jar.output}"/>
+        <delete dir="${javacard.rule.build.dir}"/>
+        <delete dir="${report.dir}"/>
+        <delete file="${javacard.rule.jar.output}"/>
+        <delete file="${jcsa.dist.zip}"/>
+        <delete dir="${build.dir}/THIRD-PARTY"/>
+        <delete file="${build.dir}/THIRD-PARTY.txt"/>
+    </target>
+
+    <target name="clean_deps" description="Clean up deps">
+        <delete dir="${build.lib.dir}"/>
+        <delete dir="${shared.lib.dir}"/>
+        <delete dir="${stack.lib.dir}"/>
+        <delete dir="${esar.lib.dir}"/>
+        <delete dir="${test.lib.dir}"/>
+    </target>
+
+    <path id="stack.runtime.classpath">
+        <fileset dir="${shared.lib.dir}" includes="*.jar"/>
+        <fileset dir="${stack.lib.dir}" includes="*.jar"/>
+    </path>
+
+    <path id="esar.runtime.classpath">
+        <fileset dir="${shared.lib.dir}" includes="*.jar"/>
+        <fileset dir="${esar.lib.dir}" includes="*.jar"/>
+    </path>
+
+    <target name="jcsa_stack" depends="check_env,resolve-stack-deps">
+        <mkdir dir="${stack.classes.dir}"/>
+        <javac srcdir="${stack.src.dir}" destdir="${stack.classes.dir}" includeantruntime="false" debug="true">
+            <classpath refid="stack.runtime.classpath"/>
+        </javac>
+    </target>
+
+    <target name="jcsa_stack_dist" depends="jcsa_stack" description="jcsa stack analyser jar">
+        <manifestclasspath property="stack.manifest.classpath" jarfile="${stack.jar.output}">
+            <classpath refid="stack.runtime.classpath"/>
+        </manifestclasspath>
+
+        <jar destfile="${stack.jar.output}">
+            <manifest>
+                <attribute name="Main-Class" value="${stack.main.class}"/>
+                <attribute name="Class-Path" value="${stack.manifest.classpath}"/>
+            </manifest>
+            <fileset dir="${stack.classes.dir}"/>
+        </jar>
+    </target>
+
+    <target name="esar" depends="check_env,resolve-esar-deps,resolve-test-deps">
+        <mkdir dir="${esar.classes.dir}"/>
+        <javac srcdir="${esar.src.dir}" destdir="${esar.classes.dir}" includeantruntime="false" debug="true">
+            <classpath>
+                <path refid="esar.runtime.classpath"/>
+                <fileset dir="${test.lib.dir}" includes="*.jar"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="esar_uptodate" depends="esar">
+        <uptodate property="esar.is.uptodate" targetfile="${esar.jar.output}">
+            <srcfiles dir="${esar.classes.dir}" includes="**/*.class"/>
+        </uptodate>
+    </target>
+
+    <target name="esar_dist" depends="esar_uptodate" unless="${esar.is.uptodate}">
+        <manifestclasspath property="esar.manifest.classpath" jarfile="${esar.jar.output}">
+            <classpath refid="esar.runtime.classpath"/>
+        </manifestclasspath>
+
+        <jar destfile="${esar.jar.output}">
+            <manifest>
+                <attribute name="Main-Class" value="${esar.main.class}"/>
+                <attribute name="Class-Path" value="${esar.manifest.classpath}"/>
+            </manifest>
+            <fileset dir="${esar.classes.dir}"/>
+        </jar>
+    </target>
+
+    <target name="javacard_rules" depends="esar_dist">
+        <mkdir dir="${javacard.rule.classes.dir}"/>
+        <javac srcdir="${javacard.rule.src.dir}" destdir="${javacard.rule.classes.dir}" includeantruntime="false" debug="true">
+            <classpath>
+                <pathelement path="${esar.jar.output}"/>
+            </classpath>
+        </javac>
+        <copy todir="${javacard.rule.classes.dir}" overwrite="true">
+            <fileset dir="${javacard.rule.src.dir}" includes="META-INF/**"/>
+        </copy>
+    </target>
+
+    <target name="javacard_rules_uptodate" depends="javacard_rules">
+        <uptodate property="javacard.rules.is.uptodate" targetfile="${javacard.rule.jar.output}">
+            <srcfiles dir="${javacard.rule.classes.dir}" includes="**/*"/>
+        </uptodate>
+    </target>
+
+    <target name="javacard_rules_dist" depends="javacard_rules_uptodate" unless="${javacard.rules.is.uptodate}">
+        <jar destfile="${javacard.rule.jar.output}" basedir="${javacard.rule.classes.dir}"/>
+    </target>
+
+    <target name="foss_list" depends="resolve-stack-deps,resolve-esar-deps"
+            description="Write third-party directory from jars shipped by jcsa_dist">
+        <mkdir dir="${build.dir}"/>
+        <exec executable="python3" failonerror="true">
+            <arg file="${basedir}/scripts/foss-list.py"/>
+            <arg value="--out"/>
+            <arg file="${foss.list.dir}"/>
+            <arg value="--dir"/>
+            <arg file="${shared.lib.dir}"/>
+            <arg value="--dir"/>
+            <arg file="${stack.lib.dir}"/>
+            <arg value="--dir"/>
+            <arg file="${esar.lib.dir}"/>
+        </exec>
+        <exec executable="python3" failonerror="true">
+            <arg file="${basedir}/scripts/notice.py"/>
+            <arg value="--out"/>
+            <arg file="${foss.list.dir}/NOTICE"/>
+            <arg value="--dir"/>
+            <arg file="${shared.lib.dir}"/>
+            <arg value="--dir"/>
+            <arg file="${stack.lib.dir}"/>
+            <arg value="--dir"/>
+            <arg file="${esar.lib.dir}"/>
+        </exec>
+    </target>
+
+    <target name="epl_lgpl_sources" depends="resolve-stack-deps,resolve-esar-deps"
+            description="Zip Maven source jars for shipped EPL and LGPL dependencies">
+        <mkdir dir="${build.dir}"/>
+        <exec executable="python3" failonerror="true">
+            <arg file="${basedir}/scripts/epl-lgpl-sources.py"/>
+            <arg value="--out"/>
+            <arg file="${build.dir}/jcsa-${jcsa.version}-epl-lgpl-sources.zip"/>
+            <arg value="--dir"/>
+            <arg file="${shared.lib.dir}"/>
+            <arg value="--dir"/>
+            <arg file="${stack.lib.dir}"/>
+            <arg value="--dir"/>
+            <arg file="${esar.lib.dir}"/>
+        </exec>
+    </target>
+
+    <target name="jcsa_dist" depends="jcsa_stack_dist,esar_dist,javacard_rules_dist"
+            description="Build stack analyser, ESAR, Java Card rules, and zip distribution">
+        <delete dir="${jcsa.dist.staging.dir}"/>
+        <mkdir dir="${jcsa.dist.staging.dir}/bin"/>
+        <copy todir="${jcsa.dist.staging.dir}/bin">
+            <fileset file="${stack.jar.output}"/>
+            <fileset file="${esar.jar.output}"/>
+            <fileset file="${javacard.rule.jar.output}"/>
+        </copy>
+        <mkdir dir="${jcsa.dist.staging.dir}/lib/shared"/>
+        <mkdir dir="${jcsa.dist.staging.dir}/lib/stack"/>
+        <mkdir dir="${jcsa.dist.staging.dir}/lib/esar"/>
+        <copy todir="${jcsa.dist.staging.dir}/lib/shared" flatten="true">
+            <fileset dir="${shared.lib.dir}" includes="*.jar"/>
+        </copy>
+        <copy todir="${jcsa.dist.staging.dir}/lib/stack" flatten="true">
+            <fileset dir="${stack.lib.dir}" includes="*.jar"/>
+        </copy>
+        <copy todir="${jcsa.dist.staging.dir}/lib/esar" flatten="true">
+            <fileset dir="${esar.lib.dir}" includes="*.jar"/>
+        </copy>
+        <copy todir="${jcsa.dist.staging.dir}/third-party">
+            <fileset dir="${foss.list.dir}"/>
+        </copy>
+        <delete file="${jcsa.dist.zip}"/>
+        <zip destfile="${jcsa.dist.zip}" basedir="${tmp.dir}" includes="${jcsa.dist.root}/**"/>
+        <delete dir="${jcsa.dist.staging.dir}"/>
+    </target>
+
+    <target name="all" depends="jcsa_stack_dist,esar_dist,javacard_rules_dist,jcsa_dist"/>
+    <target name="clean_all" depends="clean,clean_deps"/>
+    <target name="test_all" depends="checkstyle,test_esar,test_javacard_rules"/>
+    <!-- Run absolutely everything verifying the build -->
+    <target name="verify" depends="clean_all,all,test_all"/>
+</project>

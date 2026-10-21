@@ -1,0 +1,14 @@
+classPath:
+  - test-data
+  - lib/javacard/api_classic-3.1.0.jar
+sourcePath:
+  - test-src
+entryMethods:
+  - "xyz.wendland.javacard.pki.isoapplet.IsoApplet.install(byte[],short,byte)"
+  - "boolean xyz.wendland.javacard.pki.isoapplet.IsoApplet.select()"
+  - "xyz.wendland.javacard.pki.isoapplet.IsoApplet.process(javacard.framework.APDU)"
+  - "xyz.wendland.javacard.pki.isoapplet.IsoApplet.deselect()"
+plugins:
+  - output/javacard.jar
+ruleConfiguration:
+  - examples/jc-detectors.yaml

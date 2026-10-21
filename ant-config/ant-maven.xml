@@ -1,0 +1,139 @@
+<project name="ant-maven" xmlns:resolver="antlib:org.apache.maven.resolver.ant">
+    <property name="asm.version" value="9.9.1"/>
+    <property name="sootup.version" value="2.0.0"/>
+    <property name="slf4j.version" value="2.0.13"/>
+    <property name="picocli.version" value="4.7.7"/>
+    <property name="snakeyaml.version" value="2.6"/>
+    <property name="gson.version" value="2.14.0"/>
+
+    <property name="junit.version" value="6.0.3"/>
+    <property name="jacoco.version" value="0.8.14"/>
+
+    <taskdef uri="antlib:org.apache.maven.resolver.ant"
+             resource="org/apache/maven/resolver/ant/antlib.xml">
+        <classpath>
+            <fileset dir="${basedir}/${lib.dir}/build" includes="maven-resolver-ant-tasks-*-uber.jar"/>
+        </classpath>
+    </taskdef>
+
+    <target name="resolve-shared-deps">
+        <resolver:resolve>
+            <resolver:dependencies>
+                <!-- SootUp -->
+                <resolver:dependency coords="org.soot-oss:sootup.core:${sootup.version}">
+                    <resolver:exclusion coords="com.google.errorprone:error_prone_annotations"/>
+                </resolver:dependency>
+                <resolver:dependency coords="org.soot-oss:sootup.java.core:${sootup.version}">
+                    <resolver:exclusion coords="com.google.errorprone:error_prone_annotations"/>
+                </resolver:dependency>
+                <resolver:dependency coords="org.soot-oss:sootup.java.sourcecode.frontend:${sootup.version}">
+                    <resolver:exclusion coords="com.google.errorprone:error_prone_annotations"/>
+                </resolver:dependency>
+                <resolver:dependency coords="org.soot-oss:sootup.java.bytecode.frontend:${sootup.version}">
+                    <resolver:exclusion coords="com.google.code.gson:gson"/>
+                    <resolver:exclusion coords="com.google.errorprone:error_prone_annotations"/>
+                </resolver:dependency>
+                <resolver:dependency coords="org.soot-oss:sootup.callgraph:${sootup.version}">
+                    <resolver:exclusion coords="com.google.errorprone:error_prone_annotations"/>
+                </resolver:dependency>
+                <resolver:dependency coords="org.soot-oss:sootup.analysis.intraprocedural:${sootup.version}">
+                    <resolver:exclusion coords="com.google.errorprone:error_prone_annotations"/>
+                </resolver:dependency>
+                <resolver:dependency coords="org.soot-oss:sootup.analysis.interprocedural:${sootup.version}">
+                    <resolver:exclusion coords="com.google.errorprone:error_prone_annotations"/>
+                </resolver:dependency>
+
+                <!-- logging -->
+                <resolver:dependency coords="org.slf4j:slf4j-simple:${slf4j.version}"/>
+
+                <!-- parameter parsing -->
+                <resolver:dependency coords="info.picocli:picocli:${picocli.version}"/>
+            </resolver:dependencies>
+
+            <resolver:path refid="maven.shared.classpath"/>
+        </resolver:resolve>
+        <mkdir dir="${shared.lib.dir}"/>
+        <copy todir="${shared.lib.dir}" flatten="true">
+            <path refid="maven.shared.classpath"/>
+        </copy>
+    </target>
+
+    <target name="resolve-stack-deps" depends="resolve-shared-deps">
+        <resolver:resolve>
+            <resolver:dependencies>
+                <resolver:dependency coords="org.ow2.asm:asm:${asm.version}"/>
+            </resolver:dependencies>
+
+            <resolver:path refid="maven.stack.classpath"/>
+        </resolver:resolve>
+        <mkdir dir="${stack.lib.dir}"/>
+        <copy todir="${stack.lib.dir}" flatten="true">
+            <path refid="maven.stack.classpath"/>
+        </copy>
+    </target>
+
+    <target name="resolve-esar-deps" depends="resolve-shared-deps">
+        <resolver:resolve>
+            <resolver:dependencies>
+                <!-- config parsing -->
+                <resolver:dependency coords="org.yaml:snakeyaml:${snakeyaml.version}"/>
+
+                <!-- SARIF output -->
+                <resolver:dependency coords="com.google.code.gson:gson:${gson.version}"/>
+            </resolver:dependencies>
+
+            <resolver:path refid="maven.esar.classpath"/>
+        </resolver:resolve>
+        <mkdir dir="${esar.lib.dir}"/>
+        <copy todir="${esar.lib.dir}" flatten="true">
+            <path refid="maven.esar.classpath"/>
+        </copy>
+    </target>
+
+    <target name="resolve-test-deps">
+        <resolver:resolve>
+            <resolver:dependencies>
+                <resolver:dependency coords="org.junit.jupiter:junit-jupiter-engine:${junit.version}"/>
+                <resolver:dependency coords="org.junit.platform:junit-platform-launcher:${junit.version}"/>
+            </resolver:dependencies>
+            <resolver:path refid="maven.test.classpath"/>
+        </resolver:resolve>
+        <mkdir dir="${test.lib.dir}"/>
+        <copy todir="${test.lib.dir}" flatten="true">
+            <path refid="maven.test.classpath"/>
+        </copy>
+    </target>
+
+    <target name="resolve-build-deps">
+        <resolver:resolve>
+            <resolver:dependencies>
+                <resolver:dependency coords="com.puppycrawl.tools:checkstyle:13.0.0"/>
+            </resolver:dependencies>
+
+            <resolver:path refid="builddeps.classpath"/>
+        </resolver:resolve>
+        <mkdir dir="${build.lib.dir}"/>
+        <copy todir="${build.lib.dir}" flatten="true">
+            <path refid="builddeps.classpath"/>
+        </copy>
+    </target>
+
+    <target name="resolve-jacoco-deps">
+        <resolver:resolve>
+            <resolver:dependencies>
+                <resolver:dependency groupId="org.jacoco" artifactId="org.jacoco.agent" version="${jacoco.version}"
+                                   classifier="runtime"/>
+                <resolver:dependency coords="org.jacoco:org.jacoco.ant:${jacoco.version}"/>
+                <resolver:dependency coords="org.ow2.asm:asm-tree:${asm.version}"/>
+                <resolver:dependency coords="org.ow2.asm:asm-commons:${asm.version}"/>
+            </resolver:dependencies>
+            <resolver:path refid="jacoco.resolved.path"/>
+        </resolver:resolve>
+        <mkdir dir="${build.lib.dir}"/>
+        <copy todir="${build.lib.dir}" flatten="true">
+            <path refid="jacoco.resolved.path"/>
+        </copy>
+    </target>
+
+    <target name="resolve-deps" depends="resolve-stack-deps,resolve-esar-deps,resolve-test-deps,resolve-build-deps"/>
+</project>

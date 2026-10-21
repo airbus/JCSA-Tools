@@ -1,0 +1,35 @@
+/*
+ * Copyright (c) 2026 Airbus Defence and Space Oy.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.airbus.esar.fixture.implicitwiden;
+
+/**
+ * {@code int w = n & b} where {@code n} is an {@code int} parameter and {@code b} is a
+ * {@code byte} parameter. In {@code hasUnmaskedByteInExpression} the AND expression is
+ * examined: op1=Local(n,int) is not a byte → the first {@code ||} arm is false → op2 is
+ * also evaluated (L291) → op2=Local(b,byte) is an unmasked byte → returns true → warns.
+ */
+public final class IbwAndIntAndByte {
+    private static volatile int sSink;
+
+    private IbwAndIntAndByte() {
+    }
+
+    public static void entry(final int n, final byte b) {
+        final int w = n & b;
+        sSink = w;
+    }
+}

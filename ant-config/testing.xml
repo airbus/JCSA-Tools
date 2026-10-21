@@ -1,0 +1,220 @@
+<project name="testing" xmlns:jacoco="antlib:org.jacoco.ant">
+    <property name="esar.test.traverseEntryOnly" value="true"/>
+    <property name="test.includes" value="**/*"/>
+    <property name="test.excludes" value=""/>
+    <!-- Resolved by resolve-jacoco-deps (see ant-config/ant-maven.xml); flattened Maven names -->
+    <property name="jacoco.agent.jar" location="${build.lib.dir}/org.jacoco.agent-${jacoco.version}-runtime.jar"/>
+    <property name="jacoco.destfile" location="${javacard.rule.test.build.dir}/jacoco.exec"/>
+    <path id="spotbugs.junit.classpath">
+        <pathelement path="${spotbugs.plugin.jar}"/>
+        <pathelement path="${spotbugs.test.classes.dir}"/>
+        <fileset dir="${spotbugs.test.lib.dir}" includes="*.jar"/>
+        <fileset dir="${javacard.lib.dir}" includes="*.jar" erroronmissingdir="false"/>
+    </path>
+
+    <target name="checkstyle" depends="resolve-build-deps" description="Run Checkstyle on source files">
+        <taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties"
+                classpathref="builddeps.classpath"/>
+
+        <checkstyle config="checkstyle.xml"
+                    failOnViolation="true"
+                    failureProperty="checkstyle.failure">
+
+            <fileset dir="src" includes="**/*.java"/>
+            <fileset dir="test" includes="**/*.java"/>
+        </checkstyle>
+    </target>
+
+    <target name="checkstyle-report" depends="checkstyle" description="Generate HTML report from XML">
+        <xslt in="checkstyle-result.xml" out="checkstyle-result.html"
+            style="checkstyle-noframes-sorted.xsl">
+            <classpath refid="builddeps.classpath"/>
+        </xslt>
+    </target>
+
+    <path id="javacard.rules.junit.classpath">
+        <pathelement path="${esar.jar.output}"/>
+        <pathelement path="${javacard.rule.classes.dir}"/>
+        <pathelement path="${javacard.rule.test.classes.dir}"/>
+        <fileset dir="${shared.lib.dir}" includes="*.jar"/>
+        <fileset dir="${esar.lib.dir}" includes="*.jar"/>
+        <fileset dir="${test.lib.dir}" includes="*.jar"/>
+        <fileset dir="${javacard.lib.dir}" includes="*.jar" erroronmissingdir="false"/>
+    </path>
+
+    <!-- Test Java Card rules -->
+    <target name="compile_javacard_rule_tests" depends="javacard_rules">
+        <mkdir dir="${javacard.rule.test.classes.dir}"/>
+        <javac srcdir="${javacard.rule.test.src.dir}" destdir="${javacard.rule.test.classes.dir}" includeantruntime="false"
+               debug="true">
+            <classpath>
+                <pathelement path="${esar.jar.output}"/>
+                <pathelement path="${javacard.rule.classes.dir}"/>
+                <fileset dir="${shared.lib.dir}" includes="*.jar"/>
+                <fileset dir="${esar.lib.dir}" includes="*.jar"/>
+                <fileset dir="${test.lib.dir}" includes="*.jar"/>
+                <fileset dir="${javacard.lib.dir}" includes="*.jar" erroronmissingdir="false"/>
+            </classpath>
+            <include name="**/*.java"/>
+        </javac>
+        <copy todir="${javacard.rule.test.classes.dir}" preservelastmodified="true">
+            <fileset dir="${javacard.rule.test.src.dir}">
+                <include name="junit-platform.properties"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="test_javacard_rules" depends="compile_javacard_rule_tests,resolve-jacoco-deps">
+        <mkdir dir="${javacard.rule.test.build.dir}/reports"/>
+        <mkdir dir="${javacard.rule.test.build.dir}/jvm-tmp"/>
+        <available file="${jacoco.agent.jar}" property="jacoco.agent.present"/>
+        <fail unless="jacoco.agent.present"
+               message="JaCoCo agent missing under ${jacoco.agent.jar}. Run: ant resolve-jacoco-deps"/>
+        <!-- Junit -->
+        <junitlauncher printsummary="true" failureProperty="junit.failed">
+            <classpath refid="javacard.rules.junit.classpath"/>
+            <testclasses outputdir="${javacard.rule.test.build.dir}/reports">
+                <fork>
+                    <jvmarg value="-Djava.io.tmpdir=${javacard.rule.test.build.dir}/jvm-tmp"/>
+                    <jvmarg value="-Desar.test.traverseEntryOnly=${esar.test.traverseEntryOnly}"/>
+                    <jvmarg value="-javaagent:${jacoco.agent.jar}=destfile=${jacoco.destfile}"/>
+                </fork>
+                <fileset dir="${javacard.rule.test.classes.dir}">
+                    <include name="${test.includes}"/>
+                    <exclude name="${test.excludes}"/>
+                </fileset>
+                <listener type="legacy-xml" outputDir="${javacard.rule.test.build.dir}/reports"/>
+                <listener type="legacy-plain" outputDir="${javacard.rule.test.build.dir}/reports"/>
+            </testclasses>
+        </junitlauncher>
+        <mkdir dir="${report.dir}/jacoco-html"/>
+        <mkdir dir="${report.dir}/jacoco-report"/>
+        <!-- Jacoco -->
+        <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+            <classpath refid="jacoco.resolved.path"/>
+        </taskdef>
+        <jacoco:report>
+            <executiondata>
+                <file file="${jacoco.destfile}"/>
+            </executiondata>
+            <structure name="javacard-rules">
+                <classfiles>
+                    <fileset dir="${esar.classes.dir}"/>
+                    <fileset dir="${javacard.rule.classes.dir}"/>
+                </classfiles>
+                <sourcefiles encoding="UTF-8">
+                    <fileset dir="${esar.src.dir}" includes="**/*.java"/>
+                    <fileset dir="${javacard.rule.src.dir}" includes="**/*.java"/>
+                </sourcefiles>
+            </structure>
+            <html destdir="${report.dir}/jacoco-html"/>
+            <xml destfile="${report.dir}/jacoco-report/jacoco.xml"/>
+        </jacoco:report>
+        <mkdir dir="${javacard.rule.test.build.dir}/reports/junit-merged"/>
+        <mkdir dir="${javacard.rule.test.build.dir}/reports/junit-html"/>
+        <junitreport todir="${javacard.rule.test.build.dir}/reports/junit-merged">
+            <fileset dir="${javacard.rule.test.build.dir}/reports">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="noframes" todir="${javacard.rule.test.build.dir}/reports/junit-html"/>
+        </junitreport>
+        <concat destfile="${javacard.rule.test.build.dir}/reports/junit-merged/ALL-TESTS-Summary.txt" force="yes">
+            <fileset dir="${javacard.rule.test.build.dir}/reports">
+                <include name="TEST-*.txt"/>
+            </fileset>
+        </concat>
+
+        <fail message="Unit tests failed. Check the HTML report for details." if="junit.failed"/>
+    </target>
+
+    <path id="esar.junit.classpath">
+        <pathelement path="${esar.jar.output}"/>
+        <pathelement path="${esar.test.classes.dir}"/>
+        <fileset dir="${shared.lib.dir}" includes="*.jar"/>
+        <fileset dir="${esar.lib.dir}" includes="*.jar"/>
+        <fileset dir="${test.lib.dir}" includes="*.jar"/>
+    </path>
+
+    <!-- Test ESAR core (src/esar) -->
+    <target name="compile_esar_tests" depends="esar_dist">
+        <mkdir dir="${esar.test.classes.dir}"/>
+        <javac srcdir="${esar.test.src.dir}" destdir="${esar.test.classes.dir}" includeantruntime="false"
+               debug="true">
+            <classpath>
+                <pathelement path="${esar.jar.output}"/>
+                <fileset dir="${shared.lib.dir}" includes="*.jar"/>
+                <fileset dir="${esar.lib.dir}" includes="*.jar"/>
+                <fileset dir="${test.lib.dir}" includes="*.jar"/>
+            </classpath>
+            <include name="**/*.java"/>
+        </javac>
+        <copy todir="${esar.test.classes.dir}" preservelastmodified="true">
+            <fileset dir="${esar.test.src.dir}">
+                <include name="junit-platform.properties"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="test_esar" depends="compile_esar_tests,resolve-jacoco-deps"
+            description="Run ESAR core unit tests">
+        <mkdir dir="${esar.test.build.dir}/reports"/>
+        <mkdir dir="${esar.test.build.dir}/jvm-tmp"/>
+        <property name="esar.jacoco.destfile" location="${esar.test.build.dir}/jacoco.exec"/>
+        <available file="${jacoco.agent.jar}" property="jacoco.agent.present"/>
+        <fail unless="jacoco.agent.present"
+               message="JaCoCo agent missing under ${jacoco.agent.jar}. Run: ant resolve-jacoco-deps"/>
+        <junitlauncher printsummary="true" failureProperty="esar.junit.failed">
+            <classpath refid="esar.junit.classpath"/>
+            <testclasses outputdir="${esar.test.build.dir}/reports">
+                <fork>
+                    <jvmarg value="-Djava.io.tmpdir=${esar.test.build.dir}/jvm-tmp"/>
+                    <jvmarg value="-javaagent:${jacoco.agent.jar}=destfile=${esar.jacoco.destfile}"/>
+                </fork>
+                <fileset dir="${esar.test.classes.dir}">
+                    <include name="${test.includes}"/>
+                    <exclude name="${test.excludes}"/>
+                </fileset>
+                <listener type="legacy-xml" outputDir="${esar.test.build.dir}/reports"/>
+                <listener type="legacy-plain" outputDir="${esar.test.build.dir}/reports"/>
+            </testclasses>
+        </junitlauncher>
+        <mkdir dir="${report.dir}/esar-jacoco-html"/>
+        <mkdir dir="${report.dir}/esar-jacoco-report"/>
+        <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+            <classpath refid="jacoco.resolved.path"/>
+        </taskdef>
+        <jacoco:report>
+            <executiondata>
+                <file file="${esar.jacoco.destfile}"/>
+            </executiondata>
+            <structure name="esar">
+                <classfiles>
+                    <fileset dir="${esar.classes.dir}"/>
+                </classfiles>
+                <sourcefiles encoding="UTF-8">
+                    <fileset dir="${esar.src.dir}" includes="**/*.java"/>
+                </sourcefiles>
+            </structure>
+            <html destdir="${report.dir}/esar-jacoco-html"/>
+            <xml destfile="${report.dir}/esar-jacoco-report/jacoco.xml"/>
+        </jacoco:report>
+        <mkdir dir="${esar.test.build.dir}/reports/junit-merged"/>
+        <mkdir dir="${esar.test.build.dir}/reports/junit-html"/>
+        <junitreport todir="${esar.test.build.dir}/reports/junit-merged">
+            <fileset dir="${esar.test.build.dir}/reports">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="noframes" todir="${esar.test.build.dir}/reports/junit-html"/>
+        </junitreport>
+        <fail message="ESAR unit tests failed. Check the HTML report for details." if="esar.junit.failed"/>
+    </target>
+
+    <!-- Print Jimple for fixture classes -->
+    <target name="print-jimple" description="Print SootUp Jimple for fixture classes (usage: ant print-jimple -Dclasses=pkg.ClassName)">
+        <fail unless="classes" message="Specify one or more classes: ant print-jimple -Dclasses=pkg.ClassName"/>
+        <java classname="com.airbus.esar.utils.PrintJimple" fork="true" failonerror="true">
+            <classpath refid="javacard.rules.junit.classpath"/>
+            <arg line="${classes}"/>
+        </java>
+    </target>
+</project>

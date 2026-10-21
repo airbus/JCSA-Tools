@@ -1,0 +1,6 @@
+output
+!lib/build-deps
+lib/*
+test-data
+test-src
+__pycache__

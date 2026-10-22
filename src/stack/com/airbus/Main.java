@@ -37,7 +37,7 @@ import sootup.java.bytecode.frontend.inputlocation.JavaClassPathAnalysisInputLoc
 @Command(
     name = "jcsa-stack-analyser",
     mixinStandardHelpOptions = true,
-    version = "1.0.1-NB",
+    version = "1.0.1",
     description = "JCSA stack analyser",
     subcommands = {
         StackDepth.class,

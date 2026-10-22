@@ -1,13 +1,21 @@
 Changelog
 =========
 
+[1.2.1] - 2026-10-22
+------------------
+
+Bug fix release.
+
+### Fixes
+
+- `JcOneShotUsage` fixes finally block pattern detection
+
 [1.2.0] - 2026-10-13
 ------------------
 
 First public release of JCSA-Tools.
 
-Features
---------
+### Features
 
 - The ESAR Java Card plugin (`javacard.jar`) includes these detectors:
   - `JcDeprecatedRandomDataAlg` reports deprecated `RandomData` algorithms.

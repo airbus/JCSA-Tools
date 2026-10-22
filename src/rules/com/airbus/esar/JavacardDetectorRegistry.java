@@ -50,7 +50,7 @@ import com.airbus.esar.messages.JavacardRuleMessages;
  */
 public final class JavacardDetectorRegistry implements EsarDetectorProvider {
     private static final String NAME = "javacard";
-    private static final String VERSION = "1.1.0-NB";
+    private static final String VERSION = "1.1.1";
 
     @Override
     public List<ProgramVisitorIf> detectors() {

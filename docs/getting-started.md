@@ -106,11 +106,11 @@ Stack use
 ---------
 
 ```sh
-java -jar output/jcsa.jar stack_depth \
+java -jar output/jcsda.jar stack_depth \
   -c path/to/classes \
   -a com.example.Applet
 
-java -jar output/jcsa.jar class \
+java -jar output/jcsda.jar class \
   -c path/to/Applet.class
 ```
 

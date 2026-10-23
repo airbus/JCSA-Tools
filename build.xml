@@ -15,7 +15,7 @@
     <property name="stack.build.dir" value="${build.dir}/stack"/>
     <property name="stack.classes.dir" value="${stack.build.dir}/classes"/>
     <property name="stack.lib.dir" value="${lib.dir}/stack"/>
-    <property name="stack.jar" value="jcsa.jar"/>
+    <property name="stack.jar" value="jcsda.jar"/>
     <property name="stack.jar.output" value="${build.dir}/${stack.jar}"/>
     <property name="stack.main.class" value="com.airbus.Main"/>
 

@@ -7,7 +7,7 @@ SootUp Analysis Runner (ESAR), the ESAR Java Card plugin, and the Java Card
 Stack Analyser.
 
 - **ESAR** (`esar.jar`) runs SootUp analyses. Java Card detectors ship in `javacard.jar`.
-- **jcsa** (`jcsa.jar`) stack depth analyser and debugging tool.
+- **jcsa** (`jcsda.jar`) stack depth analyser and debugging tool.
 
 See [Getting Started](docs/getting-started.md).
 
@@ -35,8 +35,8 @@ To get usage help page:
 
 ```sh
 java -jar esar.jar --help
-java -jar jcsa.jar stack_depth --help
-java -jar jcsa.jar class --help
+java -jar jcsda.jar stack_depth --help
+java -jar jcsda.jar class --help
 ```
 
 ### ESAR
@@ -105,7 +105,7 @@ Suppress one rule on the following lines. `line` and `lines` are both accepted:
 Get stack depth listing from applet (descending order, default limit 100 results):
 
 ```sh
-java -jar jcsa.jar stack_depth \
+java -jar jcsda.jar stack_depth \
   -c path/to/classes \
   -a com.example.Applet
 ```
@@ -113,7 +113,7 @@ java -jar jcsa.jar stack_depth \
 Print stack usage in individual class:
 
 ```sh
-java -jar jcsa.jar class \
+java -jar jcsda.jar class \
   -c path/to/class
 ```
 

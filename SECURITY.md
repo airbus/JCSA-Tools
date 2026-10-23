@@ -17,7 +17,7 @@ Scope
 
 ### In Scope
 
-- A flaw in `esar.jar`, `javacard.jar`, or `jcsa.jar` that can be triggered by
+- A flaw in `esar.jar`, `javacard.jar`, or `jcsda.jar` that can be triggered by
   the inputs the tool reads, such as class files, source files, plugins, or
   configuration.
 - A flaw in the build or the published distribution.

@@ -7,7 +7,7 @@ SootUp Analysis Runner (ESAR), the ESAR Java Card plugin, and the Java Card
 Stack Analyser.
 
 - **ESAR** (`esar.jar`) runs SootUp analyses. Java Card detectors ship in `javacard.jar`.
-- **jcsa** (`jcsda.jar`) stack depth analyser and debugging tool.
+- **jcsda** (`jcsda.jar`) stack depth analyser and debugging tool.
 
 See [Getting Started](docs/getting-started.md).
 
@@ -52,7 +52,7 @@ To configure and disable individual rules, a rule configuration must be created.
 Dump example configuration with:
 
 ```sh
-java -jar esar.jar -p output/javacard.jar \
+java -jar esar.jar -p bin/javacard.jar \
   --dump-default-rule-configuration=rule-config.yaml
 ```
 

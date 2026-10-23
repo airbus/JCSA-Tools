@@ -36,7 +36,7 @@ Add the path to the compiled applet classes, the Java Card API, and libraries to
 `entryMethods` lists the analysis entry points. It should include the Java Card runtime entry points.
 
 ```sh
-java -jar output/esar.jar --config applet.yaml
+java -jar bin/esar.jar --config applet.yaml
 ```
 
 Findings are printed to the console. With `failOnFinding: true`,
@@ -51,7 +51,7 @@ Rule configuration
 Dump the default rule configuration with the following command:
 
 ```sh
-java -jar output/esar.jar -p output/javacard.jar \
+java -jar bin/esar.jar -p bin/javacard.jar \
   --dump-default-rule-configuration=rule-config.yaml
 ```
 
@@ -106,11 +106,11 @@ Stack use
 ---------
 
 ```sh
-java -jar output/jcsda.jar stack_depth \
+java -jar bin/jcsda.jar stack_depth \
   -c path/to/classes \
   -a com.example.Applet
 
-java -jar output/jcsda.jar class \
+java -jar bin/jcsda.jar class \
   -c path/to/Applet.class
 ```
 

@@ -129,7 +129,7 @@ This project is based on the master's thesis `A practical approach to static cod
     school = {Jamk University of Applied Sciences},
     year = {2026},
     type = {Master's thesis},
-    url = {https://urn.fi/URN:NBN:fi:amk-2026111029720}
+    url = {https://urn.fi/URN:NBN:fi:amk-2026111029720},
     doi = {10.5281/zenodo.24350689}
 }
 ```
